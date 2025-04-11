@@ -7,7 +7,7 @@
     <title>Registro Usuario</title>
 </head>
 <body>
-    <form action="/register" method="POST">
+    <form action="/register" id="formRegister"  method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
     <h1>Registro Usuario</h1>
     <label for="nombre">Nombre </label>
@@ -41,9 +41,8 @@
     <label for="password">Contraseña </label>
     <input type="text" id="password" name="password" placeholder="Contraseña" min="5" max="10" required>
     <span id="errorPassword" class="error"></span>
-    <button id="errorPassword" onclick="validarPassword()"> comprobar</button>
     <br><br>
-    <button type="submit" id="btnRegistrar" onclick="">REGISTRAR</button> 
+    <button type="submit" id="btnRegistrar" >REGISTRAR</button> 
     <button type="reset" id="btnLimpiar">Limpiar</button>
     <br><br>
     </form>
