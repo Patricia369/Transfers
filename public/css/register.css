@@ -1,0 +1,90 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Azul claro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+form{
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    padding: 20px 30px;
+    width: 400px;
+    text-align: center;
+}
+form h1 {
+    color: #003366; /* Azul oscuro */
+    margin-bottom: 20px;
+}
+/* Etiquetas */
+form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    color: #003366; /* Azul oscuro */
+    font-weight: bold;
+}
+/* Campos de entrada */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #b0c4de; /* Azul claro */
+    border-radius: 5px;
+    background-color: #f8faff; /* Fondo azul muy claro */
+    font-size: 14px;
+    color: #003366; /* Azul oscuro */
+}
+/* Campos de entrada: Enfocado */
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus {
+    border-color: #4682b4; /* Azul más intenso */
+    outline: none;
+    box-shadow: 0 0 5px rgba(70, 130, 180, 0.5); /* Sombra azul */
+}
+
+/* Botones */
+form button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4682b4; /* Azul más intenso */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+/* Botón de limpiar */
+form button[type="reset"] {
+    background-color: #b0c4de; /* Azul claro */
+    color: #003366; /* Azul oscuro */
+}
+/* Enlace al login */
+form a {
+    text-decoration: none;
+    color: #4682b4; /* Azul más intenso */
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+/* Enlace al login: Hover */
+form a:hover {
+    color: #5a9bd3; /* Azul más claro */
+}
+
+
+.error{
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
