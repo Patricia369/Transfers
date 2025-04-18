@@ -4,6 +4,7 @@ include_once __DIR__.'/../models/viajero.php';
 //echo "PASA A crear viajero";
 use App\Models\Viajero;
 
+use function Laravel\Prompts\password;
 
 class ViajeroController{ 
 private $pdo;
@@ -16,7 +17,7 @@ public function __construct($pdo){
     $this->pdo = $pdo;
 }
 public function index() {
-    // Mostrar la vista principal (por ejemplo, login)
+    // Mostrar la vista principal
     include_once __DIR__.'/views/login.php';
 }
 public function crearViajero(){
@@ -37,9 +38,7 @@ public function crearViajero(){
                 echo "<p class='error'>$error</p>";
             }
             return;
-
         }
-
         $data = [
             'nombre' => $_POST['nombre'],
             'apellido1' => $_POST['apellido1'],
@@ -49,7 +48,7 @@ public function crearViajero(){
             'ciudad' => $_POST['ciudad'],
             'pais' => $_POST['pais'],
             'email' => $_POST['email'],
-            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+            'password' => $_POST['password']
         ];
        
         // crea un nuevo registro
@@ -75,15 +74,33 @@ public function mostrarViajeros(){
 
 
 }
-public function loginViajero($email, $password) {
-    $viajero = $this->viajero->autenticarViajero($email); // Delegar la consulta al modelo
-    if ($viajero && password_verify($password, $viajero['password'])) {
-        // Autenticación exitosa
-        return true;
-    } else {
-        // Autenticación fallida
-        return false;
-    }
+public function loginViajero() {
+    session_start(); 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $usuario = $this->viajero->autenticarViajero($email);
+       if(!$usuario){
+            $error = "Sin registro de usuario.";
+            $_SESSION['error'] = $error;
+            header('Location: /index.php?error='.urlencode($error)); // Mostrar la vista de inicio de sesión con el error
+            die();
+        
+       } else if($usuario){
+    if(password_verify($password, $usuario['password'])){ //verificar la contraseña
+            $_SESSION['usuario'] = $usuario['id_viajero'];
+            $_SESSION['nombre'] = $usuario['nombre'];
+            header('Location: /Transfers/app/views/panelUsuario.php'); // Redirigir a la página de inicio
+            exit; 
+        } else {
+            $error = "Usuario o contraseña incorrectos.";
+            $_SESSION['error'] = $error; 
+            header('Location: /Transfers/app/views/login.php'); // Mostrar la vista de inicio de sesión con el error
+            die();
+            }
+        } 
+    }   
+    
 }
 }
 

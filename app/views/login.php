@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['error'])) {
+    echo "<p class='error'>" . $_SESSION['error'] . "</p>";
+    unset($_SESSION['error']); // Limpiar el mensaje después de mostrarlo
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,19 +21,19 @@
             <p>Inicia sesión en tu cuenta</p>
         </div>
         
-        <form action="/Transfers/app/controllers/viajeroController.php?action=loginViajero" method="POST" id="loginForm">
-         <input type="hidden" name="action" value="loginViajero">    
+        <form action="/Transfers/app/appController.php?controller=viajero&action=loginViajero" method="POST" id="loginForm">
+        <input type="hidden" name="action" value="loginViajero">    
         <div class="input-group">
                 <label for="userlogin">Ingresa tu usuario</label>
-                <input type="text" id="userlogin" placeholder="example@gmail.com" minlength="10" maxlength="20" required>
+                <input type="text" id="userlogin" name="email" placeholder="example@gmail.com" minlength="10" maxlength="20" required>
                 <span id="errorUser" class="error"></span>
             </div>
             <div class="input-group">
                 <label for="passlogin">Contraseña</label>
-                <input type="password" id="passlogin" placeholder="Contraseña" minlength="5" maxlength="10" required>
+                <input type="password" id="passlogin" name="password" placeholder="Contraseña" minlength="5" maxlength="10" required>
                 <span id="errorPass" class="error"></span>
             </div>
-            <button type="submit" class="login-btn" onclick="validarPassword();">Iniciar sesión</button>
+            <button type="submit" class="login-btn" >Iniciar sesión</button>
             
             <div class="register-link">
                 <p>¿No tienes cuenta? <a href="/Transfers/app/views/register.php">Regístrate</a></p>

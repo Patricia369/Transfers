@@ -199,7 +199,6 @@ function validarApellido1(){
         }  else{return true;}
 
     }   
-
     window.addEventListener("DOMContentLoaded", function(){
         var formulario = document.getElementById("formRegister");
         formulario.addEventListener("submit", function(event){

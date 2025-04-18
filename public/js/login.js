@@ -45,10 +45,19 @@ function validarPassword(){
         return true; 
 
 }
+function validarFormLogin(){
+    let validarLogin = [ validarPassword(), validarUser()];  
+    if(validarLogin.includes(false)){
+        return false;
+    }  else{return true;}
+
+}   
+
+
 window.addEventListener("DOMContentLoaded", function(){
-    var formulario = document.getElementById("formRegister");
+    var formulario = document.getElementById("loginForm");
     formulario.addEventListener("submit", function(event){
-        if(validarFormulario() == false){
+        if(validarFormLogin() == false){
             //detiene el envio del formulario si falla
             event.preventDefault(); 
             console.log("Formulario no válido.");

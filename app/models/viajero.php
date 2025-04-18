@@ -221,12 +221,11 @@ class Viajero
         $viajeros = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $viajeros;
     }
+            //retorna el viajero po su email
     public function autenticarViajero($email){
         $sql = "SELECT * FROM transfer_viajeros WHERE email = :email ";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([':email' => $email]);
-        //retorna el viajero
         return $stmt->fetch(\PDO::FETCH_ASSOC);
-
     }
 }
