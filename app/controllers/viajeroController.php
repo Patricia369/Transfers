@@ -1,7 +1,6 @@
 <?php 
 include_once __DIR__.'/../../config/config.php';
 include_once __DIR__.'/../models/viajero.php';
-//echo "PASA A crear viajero";
 use App\Models\Viajero;
 
 use function Laravel\Prompts\password;
@@ -50,7 +49,6 @@ public function crearViajero(){
             'email' => $_POST['email'],
             'password' => $_POST['password']
         ];
-       
         // crea un nuevo registro
         $this->viajero->create($data); 
         header('Location: /index.php'); // Redirigir a la página de inicio de sesión 

@@ -10,7 +10,6 @@
     <title>Registro Usuario</title>
 </head>
 <body>
-    <!------.prueba  " ----->
     <form action="/Transfers/app/appController.php?controller=viajero&action=crearViajero" id="formRegister"  method="POST">
         <input type="hidden" name="action" value="crearViajero">   
     <h1>Registro Usuario</h1>

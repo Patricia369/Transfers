@@ -1,0 +1,116 @@
+/* General */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff; /* Azul claro */
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+h1, h3, h4 {
+    color: #003366; /* Azul oscuro */
+    text-align: center;
+}
+.registrarUsuario{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.reserva-container {
+    background-color: #ffffff; /* Blanco */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px 30px;
+    width: 90%;
+    max-width: 600px;
+    flex: 1;
+    grid-row: 2;
+}
+/* Encabezado */
+.reserva-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.reserva-header h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.reserva-header p {
+    font-size: 14px;
+    color: #666666; /* Gris */
+}
+
+/* Input Groups */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    color: #003366; /* Azul oscuro */
+    margin-bottom: 5px;
+}
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #003366; /* Azul oscuro */
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #0073e6; /* Azul brillante */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 115, 230, 0.5);
+}
+/* Botón de envío */
+.reserva-btn {
+    background-color: #0073e6; /* Azul brillante */
+    color: #ffffff; /* Blanco */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.reserva-btn:hover {
+    background-color: #005bb5; /* Azul más oscuro */
+}
+
+.error-menssage {
+    color: #ff0000;
+    font-size: 0.9em;
+    margin-top: 5px;
+    
+}
+.reservaFooter{
+    margin-top: auto;
+    background-color: #003366; 
+    color: white; /*color texto*/
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra superior */
+    width: 90%;
+    max-width: 650px;
+    margin: 30px auto 0;
+}

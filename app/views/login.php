@@ -1,9 +1,5 @@
 <?php
 session_start();
-if (isset($_SESSION['error'])) {
-    echo "<p class='error'>" . $_SESSION['error'] . "</p>";
-    unset($_SESSION['error']); // Limpiar el mensaje después de mostrarlo
-}
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +16,16 @@ if (isset($_SESSION['error'])) {
             <h1>Bienvenido Transfers</h1>
             <p>Inicia sesión en tu cuenta</p>
         </div>
-        
         <form action="/Transfers/app/appController.php?controller=viajero&action=loginViajero" method="POST" id="loginForm">
         <input type="hidden" name="action" value="loginViajero">    
+        
+         <!-- Mostrar el mensaje de error dentro del formulario -->
+         <?php if (isset($_SESSION['error'])): ?>
+                <div class="error-message">
+                    <p class="error"><?php echo $_SESSION['error']; ?></p>
+                </div>
+                <?php unset($_SESSION['error']); // Limpiar el mensaje después de mostrarlo ?>
+            <?php endif; ?>
         <div class="input-group">
                 <label for="userlogin">Ingresa tu usuario</label>
                 <input type="text" id="userlogin" name="email" placeholder="example@gmail.com" minlength="10" maxlength="20" required>

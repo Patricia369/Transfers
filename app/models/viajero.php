@@ -121,7 +121,6 @@ class Viajero
     }
 
     // Métodos CRUD
-    // Crear $data para que srive
     public function create($data)
     {
           // Verificar que el correo electrónico no esté duplicado
@@ -147,7 +146,7 @@ class Viajero
             ':password' => password_hash($data['password'], PASSWORD_BCRYPT)
         ]);
     }
-    // Leer
+    // revisar el id_viajero porqué se genera solo en la bbdd y lo estoy psasndo por párametro
     public function read($id)
     {
         $sql = "SELECT * FROM viajeros WHERE id_viajero = :id_viajero";
