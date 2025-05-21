@@ -156,7 +156,7 @@ class ReservaController
             exit; //}     
         }
     }
-    /*public function mostrarReserLocalizador($localizador) {   
+    public function mostrarReserLocalizador($localizador) {   
             $localizador= "35681fac"; //$_GET['localizador'] ?? null;
 
         if(isset($localizador)){
@@ -169,5 +169,5 @@ class ReservaController
             echo "<p style='color:red;'>El localizador no es correcto</p>";
         }
        
-    }*/
+    }
 }
