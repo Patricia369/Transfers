@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\Reserva;
+
 session_start();
 if (!isset($_SESSION['usuario'])) {
     header('Location: /index.php?controller=login');
@@ -23,12 +26,28 @@ $nombre = $_SESSION['nombre'] ?? 'Usuario'; // Nombre de usuario
     <a href="/logout.php" class="btnCerrSesion">Cerrar sesión</a>
     <div class="container">
         <h2>Mis reservas</h2>
-        <table border ="1" cellpadding="10" cellspacing="0">
-            <tr>
+        <?php // $this->pdo = $pdo;
+      include_once __DIR__ . '/../models/reserva.php';
+      include_once __DIR__ . '/../../config/config.php';
+       
+        $pdo = new PDO("mysql:host=$host;dbname=$dbname", "$user", "$pass"); 
+        $sql = "SELECT * FROM transfer_reservas"; 
+         $stmt =$pdo->prepare($sql);
+         $stmt->execute();
+         $camposReserva = $stmt->fetchAll(PDO::FETCH_ASSOC);
+         
+       // print_r($stmt->errorInfo());
+
+            // echo "debajo de camposReserva";
+         ?>
+        <table border ="1" cellpadding="10" >
+        <thead>       
+        <tr>
                 <th>Localizador</th>
+                <th>email</th>
                 <th>Fecha de entrada</th>
                 <th>Hora de entrada</th>
-                <th>Número de vuelo de entrada</th>
+                <th>Nº de vuelo de entrada</th>
                 <th>Origen vuelo de entrada</th>
                 <th>Fecha de salida</th>
                 <th>Número de vuelo de salida</th>
@@ -36,9 +55,34 @@ $nombre = $_SESSION['nombre'] ?? 'Usuario'; // Nombre de usuario
                 <th>Número de viajeros</th>
                 <th>Vehículo</th>
             </tr>
-                
-</table>
+    </thead>
+    <tbody>
+        <?php foreach ($camposReserva as $reserva): 
             
-    
+          ///  var_dump($camposReserva);
+            
+            ?>
+            <tr>
+            <td><?= $reserva['localizador'] ?></td>
+            <td><?= $reserva['email_cliente'] ?></td>
+            <td><?= $reserva['fecha_entrada'] ?></td>
+            <td><?= $reserva['hora_entrada'] ?></td>
+            <td><?= $reserva['numero_vuelo_entrada'] ?></td>
+            <td><?= $reserva['origen_vuelo_entrada'] ?></td>
+            <td><?= $reserva['fecha_vuelo_salida'] ?></td>
+            <td><?= $reserva['numero_vuelo_salida'] ?></td>
+            <td><?= $reserva['hora_recogida'] ?></td>
+            <td><?= $reserva['num_viajeros'] ?></td>
+            <td><?= $reserva['id_vehiculo'] ?></td>
+            </tr>
+            <?php endforeach; ?>
+
+    </tbody>
+                  
+</table>
+        
+    </div>
+
+
 </body>
 </html>

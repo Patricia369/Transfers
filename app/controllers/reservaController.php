@@ -5,7 +5,7 @@ include_once __DIR__ . '/../models/reserva.php';
 
 use App\Models\Reserva;
 
-//use function Avifinfo\read;
+use function Avifinfo\read;
 
 class ReservaController
 {
@@ -97,13 +97,7 @@ class ReservaController
             $reserXTrayecto = $this->validarTrayecto();
             $errores = $reserXTrayecto['errores'];
             $valReserva = $reserXTrayecto['datos'];
-         //  echo "<pre>Validacion de los campos de reserva:";
-       // var_export($reserXTrayecto);
-          
-           //var_export($valReserva);
-        //echo "<pre>";
-          // var_export($reserXTrayecto);     
-            //die();  
+         
             $fechaSalida = $_POST['fecha_vuelo_salida'];
             $horaSalida = $_POST['hora_vuelo_salida'];
             $horVuelSalida = $_POST['hora_vuelo_salida'];
@@ -156,19 +150,24 @@ class ReservaController
                 $reserva['hora_recogida'] = $fechaSalida . ' ' . $_POST['hora_recogida'] . ':00';
             }
          
-            
             // Crear la reserva
             $this->reserva->crearReserva($reserva);
-            //echo "<pre>"; 
-            //var_export($reserva);
-            // echo "<p>Reserva creada con éxito.<p>";
-            header('Location: /Transfers/app/views/panelUsuario.php');
+            header("Location: /Transfers/app/views/panelUsuario.php");
             exit; //}     
         }
     }
-    public function mostrarReserLocalizador($localizador)
-    {   
+    /*public function mostrarReserLocalizador($localizador) {   
+            $localizador= "35681fac"; //$_GET['localizador'] ?? null;
 
-        $reserva = "";
-    }
+        if(isset($localizador)){
+            $reserva = $this->reserva->mostrarReserva($localizador);
+           
+            //header("Location: /Transfers/app/views/panelUsuario.php?controller=Reserva&action=mostrarReserLocalizador&localizador=$localizador");
+           include_once __DIR__ . '/Transfers/app/views/panelUsuario.php';
+           return $reserva; 
+        }else{
+            echo "<p style='color:red;'>El localizador no es correcto</p>";
+        }
+       
+    }*/
 }

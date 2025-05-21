@@ -210,9 +210,9 @@ class Reserva
             echo $error->getMessage();
             echo "<pre> Error al crear la reserva: " . $error->getMessage();
         }
-        
-        
-        return $localizador;        
+        //$this->mostrarReserva($localizador);
+      
+        return $reserva;        
 
     }/*
     public function actualizarReserva($reserva){
@@ -257,15 +257,20 @@ class Reserva
             return false; // No se encontró la reserva
         }
     }*/
-    public function mostrarReservas($localizador){
+    
+    public function mostrarReserva($localizador){
         $sql = "SELECT * FROM transfer_reservas WHERE localizador = :localizador";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':localizador' => $localizador]);
-        if ($stmt->rowCount() > 0) {
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
-        } else {
-            return null; // No se encontraron reservas
-        }
+        $stm = $this->pdo ->prepare($sql);
+
+        //$stm->bindParam(':localizador', $localizador);
+        $stm->execute([':localizador'=> $localizador]);
+        return $stm->fetch(\PDO::FETCH_ASSOC);
+    }
+    public function mostrarReservas($email_cliente){
+        $sql = "SELECT * FROM transfer_reservas where email_cliente = :email_cliente";
+        $stm = $this->pdo ->prepare($sql);
+        $stm->execute([':email_cliente' => $email_cliente]);
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
 }
