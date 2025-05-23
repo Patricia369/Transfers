@@ -11,7 +11,6 @@ class ReservaController
 {
     private $pdo;
     private $reserva;
-    //pasar el objeto PDO al constructor
     public function __construct($pdo)
     {
         //inicializar el objeto PDO
@@ -19,10 +18,7 @@ class ReservaController
         $this->pdo = $pdo;
     }
 
-    /*  public function index() {
-        // Mostrar la vista principal
-        include_once __DIR__.'/views/login.php';
-    } */
+    //Obtener los campos según  el tipo de reserva
     public function validarTrayecto()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -47,7 +43,6 @@ class ReservaController
                 'email_cliente'
             ];
             $formCompleto = [];
-            // $camposFormulario = array_merge($formEntrada,$formSalida, $campFormOblig);
             if (isset($trayecto)) {
                 if ($trayecto == 1) {
                     foreach ($campFormOblig as $campEntrada) {
@@ -68,9 +63,7 @@ class ReservaController
                         $valorSalida = $_POST[$campSalida] ?? null;
                         $valorSalida = ($valorSalida == '') ? null : $valorSalida;
                         $formCompleto[$campSalida] = $valorSalida;
-                        // var_export($valorSalida);
-                        //echo "<pre> array de formulario completo: ";
-                        //var_export($formCompleto);
+                        
                         if (in_array($campSalida, $formSalida)) {
                             if (empty($valorSalida)) {
                                 $errores[$campSalida] = "El campo $campSalida es obligatorio.";
@@ -149,9 +142,6 @@ class ReservaController
 
             if (!empty($fechaSalida) && !empty($horaSalida)) {
                 $reserva['fecha_vuelo_salida'] = $fechaSalida . ' ' . $horaSalida . ':00';
-                //var_dump($reserva['fecha_vuelo_salida']);
-                //var_export($_POST);
-                //  echo "<p>Fecha y hora de vuelo de salida: " . $reserva['fecha_vuelo_salida'] . "</p>";
 
             } else {
                 $reserva['fecha_vuelo_salida'] = null;
@@ -168,12 +158,11 @@ class ReservaController
     }
     public function mostrarReserLocalizador($localizador)
     {
-        $localizador = "35681fac"; //$_GET['localizador'] ?? null;
+        //$localizador = "35681fac"; 
 
         if (isset($localizador)) {
             $reserva = $this->reserva->mostrarReserva($localizador);
 
-            //header("Location: /Transfers/app/views/panelUsuario.php?controller=Reserva&action=mostrarReserLocalizador&localizador=$localizador");
             include_once __DIR__ . '/Transfers/app/views/panelUsuario.php';
             return $reserva;
         } else {
@@ -189,14 +178,7 @@ class ReservaController
             if (isset($_SESSION['localizador'])) {
 
                 $_SESSION['localizador'] = $_GET['localizador'];
-                //  var_dump($localizador);
-                // $localizador = $_SESSION['localizador'];
-                // var_dump($localizador);
-                // $localizador = $this->reserva->mostrarReserva($localizador);
-                // var_dump($localizador['localizador']);
-                // header('Location: /Transfers/app/views/panelUsuario.php');
-                // var_dump($localizador);
-                // return $localizador;
+               
                 header('Location: /Transfers/app/views/panelUsuario.php');
             } else {
                 echo "<p style='color:red;'>El localizador no es correcto</p>";

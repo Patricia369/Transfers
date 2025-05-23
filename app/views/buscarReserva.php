@@ -30,8 +30,6 @@
             <tbody>
                 <?php foreach ($camposReserva as $reserva):
 
-                    ///  var_dump($camposReserva);
-
                 ?>
                     <tr>
                         <td><?= $reserva['localizador'] ?></td>

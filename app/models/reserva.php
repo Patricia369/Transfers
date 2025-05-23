@@ -242,21 +242,7 @@ class Reserva
             ':id_reserva' => $reserva['id_reserva']
         ]); 
     }
-    /*
-    public function eliminarReserva($localizador){
-        $sql = "SELECT  id_reserva FROM transfer_reservas WHERE localizador = :localizador";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([':localizador' => $localizador]);
-        $id_reserva = $stmt->fetchColumn();
-        if ($id_reserva) {
-            $sql = "DELETE FROM transfer_reservas WHERE id_reserva = :id_reserva";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->execute([':id_reserva' => $id_reserva]);
-            return true; // Reserva eliminada
-        } else {
-            return false; // No se encontró la reserva
-        }
-    }*/
+    */
     
     public function mostrarReserva($localizador){
         $sql = "SELECT * FROM transfer_reservas WHERE localizador = :localizador";

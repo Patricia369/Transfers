@@ -24,7 +24,7 @@ switch ($controllerName) {
 if (method_exists($controller, $action)) {
     $controller->$action();
 } else {
-    die("Acción no encontrada.");
+    die("");
 }
     
 

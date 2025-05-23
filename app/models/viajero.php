@@ -146,7 +146,6 @@ class Viajero
             ':password' => password_hash($data['password'], PASSWORD_BCRYPT)
         ]);
     }
-    // revisar el id_viajero porqué se genera solo en la bbdd y lo estoy psasndo por párametro
     public function read($id)
     {
         $sql = "SELECT * FROM viajeros WHERE id_viajero = :id_viajero";
@@ -164,7 +163,7 @@ class Viajero
             $this->pais = $viajero['pais'];
             $this->email = $viajero['email'];
         }
-        // Lógica para obtener un viajero de la base de datos por su ID
+        
     }
 
     // Actualizar
@@ -202,7 +201,7 @@ class Viajero
         $this->email = null;
         $this->password = null;
 
-        // Lógica para eliminar un viajero de la base de datos por su ID
+       
     }
     public function buscarViajero($id_viajero)
     {

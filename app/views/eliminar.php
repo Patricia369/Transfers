@@ -17,7 +17,7 @@
         $localizador = $_GET['localizador'];
         $esEliminado = false;
         try {
-            // $pdo = new PDO("mysql:host=localhost;dbname=mi_base", "usuario", "clave");
+
             $conexion = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
 
             $stmt = $conexion->prepare("DELETE FROM transfer_reservas WHERE localizador = :localizador");

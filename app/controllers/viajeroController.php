@@ -10,8 +10,7 @@ private $pdo;
 private $viajero;
 //pasar el objeto PDO al constructor
 public function __construct($pdo){
-   // echo ("antes de entrar a crear viajero"); 
-    //inicializar el objeto PDO
+   
     $this->viajero = new Viajero($pdo);
     $this->pdo = $pdo;
 }
@@ -20,7 +19,6 @@ public function index() {
     include_once __DIR__.'/views/login.php';
 }
 public function crearViajero(){
-  //  echo "dentro de crear viajero";
     if($_SERVER ['REQUEST_METHOD'] === 'POST'){
         $requiredFields = ['nombre', 'apellido1', 'apellido2', 'direccion', 
         'codigoPostal','ciudad', 'pais', 'email', 'password'];
@@ -52,7 +50,6 @@ public function crearViajero(){
         // crea un nuevo registro
         $this->viajero->create($data); 
         header('Location: /index.php'); // Redirigir a la página de inicio de sesión 
-       // echo "Usuario creado con éxito.";
         exit; // termina la ejecución 
     }
 

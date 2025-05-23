@@ -31,7 +31,7 @@ if (isset($_SESSION['localizador'])) {
 </head>
 
 <body>
-    <h2>Bienvenido usuario particular</h2>
+    <h2>Bienvenido usuario</h2>
     <h1>Bienvenido, <?= htmlspecialchars($nombre) ?></h1>
     <h3><?
         echo $email ?></h3>
@@ -53,22 +53,20 @@ if (isset($_SESSION['localizador'])) {
 
         include_once __DIR__ . '/../models/reserva.php';
         include_once __DIR__ . '/../../config/config.php';
-        // if (isset($_SESSION['localizador'])) {
-        //     $localizador = $_SESSION['localizador'];
-        // }
+
 
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", "$user", "$pass");
-        // $sql = "SELECT * FROM transfer_reservas"; 
+       
 
         if ($localizador == '') {
-            var_dump($localizador);
+           // var_dump($localizador);
             $sql = "SELECT * FROM transfer_reservas WHERE email_cliente = :email";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([':email' => $email]);
             $camposReserva = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $_SESSION['localizador'] = '';
         } else {
-            var_dump($localizador);
+           // var_dump($localizador);
             $sql = "SELECT * FROM transfer_reservas WHERE email_cliente = :email AND localizador = :localizador";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([':email' => $email, ':localizador' => $localizador]);
@@ -76,34 +74,17 @@ if (isset($_SESSION['localizador'])) {
             $_SESSION['localizador'] = '';
         }
 
-        // var_dump($_SESSION['localizador']);
         function eliminarReserva($id)
         {
-            var_dump($id);
+          
             include_once __DIR__ . '/../models/reserva.php';
             include_once __DIR__ . '/../../config/config.php';
             $pdo = new PDO("mysql:host=$host;dbname=$dbname", "$user", "$pass");
             $sql = "DELETE FROM transfer_reservas WHERE localizador = :localizador";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([':localizador' => $id]);
-            // header('Location: /Transfers/app/views/panelUsuario.php');
+           
         }
-
-
-        //     echo "<form method='POST' action='eliminar.php' onsubmit='return confirm(\"¿Estás seguro?\")'>
-        //     <input type='hidden' name='id' value='$id'>
-        //     <button class='btn' type='submit'>Eliminar</button>
-        //   </form>";
-
-
-        //     echo "<form method='POST' action='eliminar.php' onsubmit='return confirm(\"¿Estás seguro?\")'>
-        //     <input type='hidden' name='id' value='$id'>
-        //     <button class='btn' type='submit'>Eliminar</button>
-        //   </form>";
-
-        // print_r($stmt->errorInfo());
-
-        // echo "debajo de camposReserva";
 
         ?>
         <table border="1" cellpadding="10">
@@ -126,7 +107,7 @@ if (isset($_SESSION['localizador'])) {
             <tbody>
                 <?php foreach ($camposReserva as $reserva):
 
-                    ///  var_dump($camposReserva);
+                   
 
                 ?>
                     <tr>
