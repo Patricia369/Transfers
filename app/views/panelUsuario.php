@@ -8,9 +8,18 @@ if (!isset($_SESSION['usuario'])) {
     exit;
 }
 $nombre = $_SESSION['nombre'] ?? 'Usuario'; // Nombre de usuario
-$email = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuario'; ?>
+$email = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuario';
+if (isset($_SESSION['localizador'])) {
 
-<!DOCTYPE html>
+    $localizador = $_SESSION['localizador'];
+    
+} else {
+
+    $localizador = null;
+   
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,22 +36,47 @@ $email = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuario'; ?>
     <h3><?
         echo $email ?></h3>
     <a href="reserva.php" class="btn">Realizar reserva</a>
-    <a href="/logout.php" class="btnCerrSesion">Cerrar sesión</a>
+    <a href="logout.php" class="btnCerrSesion">Cerrar sesión</a>
     <div class="container">
         <h2>Mis reservas</h2>
-        <?php // $this->pdo = $pdo;
+        <div class="container">
+            <form action="/Transfers/app/appController.php?controller=reserva&action=buscarxLocalizador?" method="get">
+                <input type="hidden" name="controller" value="reserva">
+                <input type="hidden" name="action" value="buscarxLocalizador">
+                <input type="text" name="localizador" id="localizador" placeholder="Ingresa el localizador">
+                <button type="submit" class="btnBuscar">Buscar
+                </button>
+            </form>
+        </div><br>
+        <?php
 
 
         include_once __DIR__ . '/../models/reserva.php';
         include_once __DIR__ . '/../../config/config.php';
+        // if (isset($_SESSION['localizador'])) {
+        //     $localizador = $_SESSION['localizador'];
+        // }
 
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", "$user", "$pass");
         // $sql = "SELECT * FROM transfer_reservas"; 
-        $sql = "SELECT * FROM transfer_reservas WHERE email_cliente = :email";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([':email' => $email]);
-        $camposReserva = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        if ($localizador == '') {
+            var_dump($localizador);
+            $sql = "SELECT * FROM transfer_reservas WHERE email_cliente = :email";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':email' => $email]);
+            $camposReserva = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $_SESSION['localizador'] = '';
+        } else {
+            var_dump($localizador);
+            $sql = "SELECT * FROM transfer_reservas WHERE email_cliente = :email AND localizador = :localizador";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':email' => $email, ':localizador' => $localizador]);
+            $camposReserva = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $_SESSION['localizador'] = '';
+        }
+
+        // var_dump($_SESSION['localizador']);
         function eliminarReserva($id)
         {
             var_dump($id);
@@ -54,6 +88,8 @@ $email = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuario'; ?>
             $stmt->execute([':localizador' => $id]);
             // header('Location: /Transfers/app/views/panelUsuario.php');
         }
+
+
         //     echo "<form method='POST' action='eliminar.php' onsubmit='return confirm(\"¿Estás seguro?\")'>
         //     <input type='hidden' name='id' value='$id'>
         //     <button class='btn' type='submit'>Eliminar</button>
@@ -68,7 +104,7 @@ $email = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuario'; ?>
         // print_r($stmt->errorInfo());
 
         // echo "debajo de camposReserva";
-        
+
         ?>
         <table border="1" cellpadding="10">
             <thead>
@@ -115,20 +151,15 @@ $email = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Usuario'; ?>
 
     </div>
 
-<script>
-function eliminarReserva(id) {
-    if (confirm("¿Estás seguro de que deseas eliminar esta reserva?")) {
-        // Llamada a PHP por URL (GET)
-        window.location.href = "eliminar.php?localizador=" + encodeURIComponent(id);
-    }
-}
-</script>
-<button type="submit" aria-label="Buscar">
-    <!-- Ícono lupa SVG -->
-    <svg viewBox="0 0 24 24">
-      <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM9.5 14A4.5 4.5 0 119.5 5a4.5 4.5 0 010 9z"/>
-    </svg>
-  </button>
+    <script>
+        function eliminarReserva(id) {
+            if (confirm("¿Estás seguro de que deseas eliminar esta reserva?")) {
+                // Llamada a PHP por URL (GET)
+                window.location.href = "eliminar.php?localizador=" + encodeURIComponent(id);
+            }
+        }
+    </script>
+
 </body>
 
 </html>

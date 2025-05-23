@@ -2,8 +2,7 @@
 include_once __DIR__.'/../config/config.php';
 include_once ('controllers/viajeroController.php');
 include_once ('controllers/reservaController.php');
-
-//echo "Dentro del appCpntroller!";
+error_reporting(E_ALL);
 
 $pdo = new PDO("mysql:host=$host;dbname=$dbname", "$user", "$pass");
    // Obtener el controlador y la acción de la solicitud

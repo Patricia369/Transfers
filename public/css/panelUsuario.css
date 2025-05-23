@@ -19,3 +19,14 @@ body{
     border-radius: 5px;
     margin-left:10px;
 }
+.buscador {
+   outline: none;
+   box-sizing: border-box;
+   height: auto;
+    width: 100%;
+    padding: 20px;
+    border-radius: 50px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+   
+}

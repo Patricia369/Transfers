@@ -88,6 +88,7 @@ public function loginViajero() {
     if(password_verify($password, $usuario['password'])){ //verificar la contraseña
             $_SESSION['usuario'] = $usuario['email'];
             $_SESSION['nombre'] = $usuario['nombre'];
+            $_SESSION['localizador'] = ''; // Guardar el localizador en la sesión
             header('Location: /Transfers/app/views/panelUsuario.php'); // Redirigir a la página de inicio
             exit; 
         } else {
