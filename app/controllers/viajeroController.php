@@ -58,7 +58,7 @@ public function actualizarViajero($id_viajero, $data) {
     $this->viajero->update($id_viajero, $data); 
 }
 public function eliminarViajero($id_viajero) {
-    $this->viajero->delete($id_viajero); // Delegar la eliminación al modelo
+    $this->viajero->delete($id_viajero); //  Elimina el viajero por su ID
 }
 public function buscarViajero($id_viajero) {
     return $this->viajero->read($id_viajero); // Delegar la consulta al modelo
@@ -86,8 +86,19 @@ public function loginViajero() {
             $_SESSION['usuario'] = $usuario['email'];
             $_SESSION['nombre'] = $usuario['nombre'];
             $_SESSION['localizador'] = ''; // Guardar el localizador en la sesión
-            header('Location: /Transfers/app/views/panelUsuario.php'); // Redirigir a la página de inicio
-            exit; 
+            //header('Location: /Transfers/app/views/panelUsuario.php'); // Redirigir a la página de inicio
+            //exit;
+            // Verificar si es admin (usa strpos)
+            if (strpos($usuario['email'], '@admin') !== false) {
+                $_SESSION['rol'] = 'admin';
+                $_SESSION['admin'] = true; // Establecer una variable de sesión para indicar que es admin
+                header('Location: /Transfers/app/views/panelAdmin.php');
+            }else {
+                $_SESSION['rol'] = 'usuario';
+                header('Location: /Transfers/app/views/panelUsuario.php');
+            }
+            exit; // Terminar la ejecución después de redirigir
+
         } else {
             $error = "Usuario o contraseña incorrectos.";
             $_SESSION['error'] = $error; 

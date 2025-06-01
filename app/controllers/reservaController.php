@@ -170,8 +170,34 @@ class ReservaController
         }
     }
 
-    public function buscarxLocalizador()
-    {
+    public function buscarxLocalizador(){
+        session_start();
+        
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
+        $localizador = $_GET['localizador'] ?? '';
+        $_SESSION['localizador'] = $localizador;
+        // Redirige según el rol del usuario
+        if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin') {
+            header('Location: /Transfers/app/views/panelAdmin.php');
+            exit;
+        } else if(isset($_SESSION['rol']) && $_SESSION['rol'] === 'usuario'){
+             header('Location: /Transfers/app/views/panelUsuario.php');
+            exit;
+
+        }else {
+            echo "<p style='color:red;'>El localizador no es correcto</p>";
+            $_SESSION['localizador'] = '';
+            exit;
+        }
+        
+    
+    }
+
+
+
+    }
+   /* {
         session_start();
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
@@ -186,5 +212,5 @@ class ReservaController
                 exit;
             }
         }
-    }
+    }*/
 }
