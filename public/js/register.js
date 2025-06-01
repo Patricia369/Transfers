@@ -39,7 +39,7 @@ function validarApellido1(){
         return false;
     } 
     if(!apellidoRegex.test(apellido1) || !isNaN(apellido1)){
-        errorApellido1.textContent = "No debe ingresar números en su primer apellido .";
+        errorApellido1.textContent = "No debe ingresar números, ni tildes en su primer apellido .";
         return false;
     } 
     return true;
@@ -54,7 +54,7 @@ function validarApellido1(){
             return false;
         }
         if(!isNaN(apellido2)){
-            errorApellido2.textContent = "No debe ingresar números en el segundo apellido.";
+            errorApellido2.textContent = "No debe ingresar números, ni tildes en el segundo apellido.";
              return false;
         }
         if ( apellido2.length < 3 || apellido2.length > 15){
@@ -97,6 +97,26 @@ function validarApellido1(){
             return false;
         } 
         return true;
+    }
+    function validarCiudad(){
+        var ciudad = document.getElementById("ciudad").value;
+        let errorCiudad = document.getElementById("errorCiudad");
+        let ciudadRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+(?:\s[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ]+){0,3}$/;; 
+        console.log("validarCiudad"+ ciudad);
+        errorCiudad.textContent = ""; 
+        if(!ciudad.trim()){
+            errorCiudad.textContent = "Debe ingresar una ciudad.";
+            return false;
+        }
+        if ( ciudad.length < 4 || ciudad.length > 15){
+            errorCiudad.textContent = "Debe ingresar una ciudad entre 3 y 18 caracteres.";
+            return false;
+        }
+        if(!ciudadRegex.test(ciudad) || !isNaN(ciudad)){
+            errorCiudad.textContent = "No debe ingresar números en la ciudad. Debe ingresar una ciudad válida.";
+            return false;
+        }
+
     }
     function validarPais(){
         var pais = document.getElementById("pais").value;
@@ -173,13 +193,12 @@ function validarApellido1(){
     }
     function validarFormulario(){
         let validacionCampos = [validarNombre(), validarApellido1(), validarApellido2(), validarDireccion(),
-                 validarCodPostal(), validarPais(), validarEmail(), validarPassword()];  
+                 validarCodPostal(), validarCiudad(), validarPais(), validarEmail(), validarPassword()];  
         if(validacionCampos.includes(false)){
             return false;
         }  else{return true;}
 
     }   
-
     window.addEventListener("DOMContentLoaded", function(){
         var formulario = document.getElementById("formRegister");
         formulario.addEventListener("submit", function(event){

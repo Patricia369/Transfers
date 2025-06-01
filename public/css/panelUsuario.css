@@ -1,0 +1,32 @@
+body{
+    background-color: #cce0f5;
+    font-family: Arial, sans-serif;
+}
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.btnCerrSesion{
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left:10px;
+}
+.buscador {
+   outline: none;
+   box-sizing: border-box;
+   height: auto;
+    width: 100%;
+    padding: 20px;
+    border-radius: 50px;
+    font-size: 20px;
+    border: 1px solid #ccc;
+   
+}

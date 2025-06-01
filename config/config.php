@@ -1,17 +1,16 @@
 <?php
 $host ='database'; // Database host
 $dbname ='transfers'; // Database name
-$suer ='user'; // Database user
-$pass ='password'; // Database password
-
+$user ='user'; // Database user
+$pass ='12345'; // Database password
 try{
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $suer, $pass);
-    echo "Connected to the database successfully!" + $host;
+    $conexion = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
 }catch(PDOException $error){
     die("Connection failed: " . $error->getMessage());
-    echo "Connection failed: " . $error->getMessage();
 
 
 }
+$conexion = null; // Close the connection
 ?>

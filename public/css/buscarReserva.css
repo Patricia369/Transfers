@@ -1,0 +1,21 @@
+body{
+    background-color: #cce0f5;
+    font-family: Arial, sans-serif;
+}
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+.btnAtras{
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #3562dc;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left:10px;
+}
